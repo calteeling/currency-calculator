@@ -1,4 +1,6 @@
 # Currency Calculator
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
 
 A simple command-line Python app that converts between various currencies using real-time exchange rates via FreeCurrencyAPI (https://freecurrencyapi.com/).
 
