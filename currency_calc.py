@@ -8,15 +8,13 @@ Created on Tue Apr 22 16:23:52 2025
 import os
 from dotenv import load_dotenv
 from colorama import Fore, Style, init
-init(autoreset=True)
 from requests import get
 from pprint import PrettyPrinter
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
-API_KEY = 'fca_live_SFB2RXYqjBttQGTD7a5ViMKomo6zJPAHIEZSJhwk'
 BaseURL = "https://api.freecurrencyapi.com"
-
+init(autoreset=True)
 printer = PrettyPrinter()
 
 def get_currencies():  
@@ -25,24 +23,20 @@ def get_currencies():
     data = get(url).json()['data']
     data = list(data.items())
     data.sort()
-    
     return data
 
 def print_currencies(currencies):
     for name, currency in currencies:
         name = currency['name']
         _id = currency['code']
-        
         symbol = currency.get("currencySymbol", "")
         print(f"{_id} - {name} - {symbol}")
     
 def exchange_rate(currency1, currency2):
     endpoint = f"v1/latest?apikey={API_KEY}&base_currency={currency1}"
     url = BaseURL + '/' + endpoint
-    
     response = get(url)
     data = response.json()
-    
     if 'data' in data and currency2 in data['data']:
         rate = data['data'][currency2]
         print(f"1 {currency1} = {rate} {currency2}")
@@ -50,20 +44,16 @@ def exchange_rate(currency1, currency2):
     else:
         print(f"Sorry. Couldn't find the exchange rate from {currency1} to {currency2}")
         return None
-# data = get_currencies()
-# print_currencies(data)
 
 def convert(currency1, currency2, amount):
     rate = exchange_rate(currency1, currency2)
     if rate is None:
         return
-    
     try:
         amount = float(amount)
     except:
         print("Invalid amount.")
         return
-    
     converted_amount = rate * amount
     print(f"{Fore.GREEN}{amount:.2f}{Style.RESET_ALL} in {currency1} is equal to {Fore.GREEN}{converted_amount:.2f}{Style.RESET_ALL} in {currency2}")
     
@@ -71,19 +61,15 @@ def convert(currency1, currency2, amount):
     
 def main():
     currencies = get_currencies()
-    
     print("Welcome to the currency converter!")
     print()
-    
     print('Commands:')
     print("List - lists the different currencies")
     print("Convert - calculates the conversion rate between two currencies")
     print("Rate - get the exchange rate of two countries")
     print()
-    
     while True:
         command = input("Enter a command (q to quit): ").lower()
-        
         if command == 'q':
             print('Goodbye.')
             break
