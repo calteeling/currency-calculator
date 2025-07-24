@@ -55,3 +55,5 @@ This project is open source and available under the MIT License.
 
 Created by Cal
 
+This project is heavily inspired by Tech With Tim on Youtube (https://www.youtube.com/@TechWithTim).
+
