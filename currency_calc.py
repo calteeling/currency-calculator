@@ -5,12 +5,15 @@ Created on Tue Apr 22 16:23:52 2025
 
 @author: cal
 """
-
+import os
+from dotenv import load_dotenv
 from colorama import Fore, Style, init
 init(autoreset=True)
 from requests import get
 from pprint import PrettyPrinter
 
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
 API_KEY = 'fca_live_SFB2RXYqjBttQGTD7a5ViMKomo6zJPAHIEZSJhwk'
 BaseURL = "https://api.freecurrencyapi.com"
 
